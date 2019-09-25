@@ -1,0 +1,73 @@
+﻿@page
+@model RazorApplication1.Pages.BookList.IndexModel
+@{
+	ViewData["Title"] = "Index";
+}
+<br />
+<div class="container row">
+	<div class="col-6">
+		<h1>Book List</h1>
+
+	</div>
+
+	<div class="col-6 text-right ">
+	 <a asp-page="Create" class="btn btn-primary">Create New Book</a>
+	</div>
+
+	@if (Model.Message!=null)
+	{
+		<div  class="alert alert-info alert-dismissible col-md-12" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aira-label="close">
+		<span aria-hidden="true">&times;</span>
+				</button>
+            @Model.Message
+		</div>
+	}
+</div>
+
+@if(Model.Books.Count()>0)
+{
+	<br />
+	<br />
+		<form method="post">
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">@Html.DisplayNameFor(m => m.Books.FirstOrDefault().Name)</th>
+				<th scope="col">@Html.DisplayNameFor(m => m.Books.FirstOrDefault().Author)</th>
+				<th scope="col">@Html.DisplayNameFor(m => m.Books.FirstOrDefault().ISBN)</th>
+				<th scope="col">Edit/Delete</th>
+
+
+			</tr>
+		</thead>
+			<tbody>
+				@foreach (var book in Model.Books)
+				{
+					<tr>
+						<th scope="row">@book.Name</th>
+						<td>@book.Author</td>
+						<td>@book.ISBN</td>
+						<td>
+							<button asp-page-handler="Delete" asp-route-id="@book.Id"  onclick="return confirm('Are You Sure Want To Delete This Book?')"     class="btn btn-danger">Delete</button>
+							<a asp-route-Id="@book.Id" asp-page="Edit" class="btn btn-sucess button-sm">Edit</a>
+						</td>
+
+
+
+					</tr>
+				}
+
+
+			</tbody>
+	</table>
+  </form>
+
+}
+else
+{
+	 <p>
+		 No Books Avaliable
+	 </p>
+}

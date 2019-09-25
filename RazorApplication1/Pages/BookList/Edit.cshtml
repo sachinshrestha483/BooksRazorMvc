@@ -1,0 +1,46 @@
+﻿@page
+@model RazorApplication1.Pages.BookList.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<div class="container">
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Book.Name" for="exampleFormControlInput1"></label>
+            <input asp-for="Book.Name" class="form-control col-lg-4">
+        </div>
+        <span asp-validation-for="Book.Name" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Book.Author" for="exampleFormControlInput1"></label>
+            <input asp-for="Book.Author" class="form-control col-lg-4">
+        </div>
+        <span asp-validation-for="Book.Author" class="text-danger"></span>
+
+        <div class="form-group">
+            <label asp-for="Book.ISBN" for="exampleFormControlInput1"></label>
+            <input asp-for="Book.ISBN" class="form-control col-lg-4">
+        </div>
+        <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+        <input type="hidden" asp-for="Book.Id" />
+
+        <div class="row">
+            <input type="submit" value="Update" class="btn btn-primary form-control col-lg-2" /> &nbsp;
+
+            <a href="/BookList" class="btn btn-primary col-lg-2">Back To List</a>
+
+        </div>
+
+    </form>
+
+
+
+</div>
+
+@section  scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
